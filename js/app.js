@@ -32,6 +32,18 @@ function register()
     // other fields can be set just like with Parse.Object
     user.set("phone", $("#phone").val());
 
+    var fileUploadControl = $("#profilePhotoFileUpload")[0];
+    if (fileUploadControl.files.length > 0) {
+        var file = fileUploadControl.files[0];
+        var name = "photo.jpg";
+
+        var parseFile = new Parse.File(name, file);
+
+        user.set("userimage", parseFile);
+    }
+
+   
+
     user.signUp(null, {
         success: function (user) {
             window.location.href = "index.html";

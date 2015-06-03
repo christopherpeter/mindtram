@@ -1,0 +1,45 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>MindTram- Knowledge Is Wealth</title>
+    <meta name="description" content="My Parse App">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
+    <script src="js/intialize.js"></script>
+    <script src="js/submitquestion.js"></script>
+    <script>
+    $(function() {
+        $( "#startdate" ).datepicker();
+        $( "#enddate" ).datepicker();
+    });
+    </script>
+</head>
+<body>
+
+    <div id="main">
+        <h1>MindTram - Questionare</h1>
+       
+            Ask a question: <textarea id="question" width="250px"></textarea></br></br>
+            Option 1:  <textarea id="optiona" width="250px"></textarea></br></br>
+            Option 2:  <textarea id="optionb" width="250px"></textarea></br></br>
+            Option 3:  <textarea id="optionc" width="250px"></textarea></br></br>
+            Option 4:  <textarea id="optiond" width="250px"></textarea></br></br>
+           
+
+            Answer  : <input type="number" id="answer" /></br></br>
+           Start Date: <input type="text" id="startdate" width="250px" /></br></br>
+            End Date: <input type="text" id="enddate" width="250px" /></br></br>
+
+            <button onclick="submitquestion()">Submit</button>
+            
+       
+    </div>
+
+</body>
+</html>

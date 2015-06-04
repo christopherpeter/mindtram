@@ -1,4 +1,27 @@
-﻿function submitquestion()
+﻿function loadquestionpreliminary()
+{
+    var userimage = "";
+    var query1 = new Parse.Query("userprofiles");
+    query1.equalTo("userid", Parse.User.current().id);
+    query1.find({
+        success: function (result) {
+
+            for (var i = 0; i < result.length; i++) {
+                var object = result[i];
+
+                userimage = object.get("profileimage").url();
+                $('#profileimage')[0].src = userimage;
+            }
+        },
+        error: function (error) {
+            // Something went wrong
+        }
+    });
+
+
+}
+
+function submitquestion()
 {       
 
     var question = Parse.Object.extend("questionare");

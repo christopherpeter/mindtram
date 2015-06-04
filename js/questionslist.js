@@ -29,7 +29,7 @@
           for (var i = 0; i < questions.length; i++) {
                 var object = questions[i];
 
-                output = output + "<b>Question " + (i + 1) + "</b><br/><br/>";
+                output = output + "<b>Question " + (i + 1) + "</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#'>Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#'>Delete</a><br/><br/>";
                 output = output + "<label>" + object.get('question') + "</label><br/><br/>"
                 output = output + "Option A  -<label>" + object.get('option1') + "</label><br/><br/>"
                 output = output + "Option B  -<label>" + object.get('option2') + "</label><br/><br/>"

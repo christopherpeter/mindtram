@@ -20,9 +20,14 @@
     });
     </script>
 </head>
-<body>
+<body onload="loadquestionpreliminary()">
 
     <div id="main">
+        <a href="#" onclick="logout()" style="float:right">Logout</a>
+        <a href="profile.html" style="float:right;margin-right:15px">Profile</a>&nbsp;&nbsp;&nbsp;      
+        <a href="questionare.html" style="float:right;margin-right:15px">Ask Question</a>&nbsp;&nbsp;&nbsp;
+        <a href="myquestions.html" style="float:right;margin-right:15px">My Questions</a>&nbsp;&nbsp;&nbsp;
+        <img id="profileimage" style="border-radius: 50%;width:100px;height:100px;" />
         <h1>MindTram - Ask Question</h1>
        
             Ask a question: <textarea id="question" width="250px"></textarea></br></br>

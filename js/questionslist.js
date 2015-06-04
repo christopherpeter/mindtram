@@ -1,8 +1,27 @@
 ﻿function loadquestions()
 {
 
+    var userimage = "";
+    var query1 = new Parse.Query("userprofiles");    
+    query1.equalTo("userid", Parse.User.current().id);
+    query1.find({
+        success: function (result) {
+          
+            for (var i = 0; i < result.length; i++) {
+                var object = result[i];
+                alert(JSON.stringify(object));
+                userimage = object.get("profileimage").url;
+                $('#profileimage')[0].src = userimage;
+            }
+        },
+        error: function (error) {
+            // Something went wrong
+        }
+    });
+
     var questions = Parse.Object.extend("questionare");
     var query = new Parse.Query(questions);
+    
     query.equalTo("userid", Parse.User.current().id);
     query.find({
         success: function (questions) {
@@ -10,7 +29,7 @@
           for (var i = 0; i < questions.length; i++) {
                 var object = questions[i];
 
-                output = output + "Question " + (i + 1) + "<br/><br/>";
+                output = output + "<b>Question " + (i + 1) + "</b><br/><br/>";
                 output = output + "<label>" + object.get('question') + "</label><br/><br/>"
                 output = output + "Option A  -<label>" + object.get('option1') + "</label><br/><br/>"
                 output = output + "Option B  -<label>" + object.get('option2') + "</label><br/><br/>"

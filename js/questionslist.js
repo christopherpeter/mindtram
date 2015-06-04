@@ -9,8 +9,8 @@
           
             for (var i = 0; i < result.length; i++) {
                 var object = result[i];
-                alert(JSON.stringify(object));
-                userimage = object.get("profileimage").url;
+               
+                userimage = object.get("profileimage").url();
                 $('#profileimage')[0].src = userimage;
             }
         },

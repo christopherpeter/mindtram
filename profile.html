@@ -12,16 +12,20 @@
     <script src="js/intialize.js"></script>
     <script src="js/app.js"></script>
 </head>
-<body>
+<body onload="loadprofile()">
 
     <div id="main">
+        <a href="#" onclick="logout()" style="float:right">Logout</a>
+        <a href="profile.html" style="float:right;margin-right:15px">Profile</a>&nbsp;&nbsp;&nbsp;
+        <a href="myquestions.html" style="float:right;margin-right:15px">My Questions</a>&nbsp;&nbsp;&nbsp;
+        <a href="questionare.html" style="float:right;margin-right:15px">Ask Question</a>&nbsp;&nbsp;&nbsp;
         <h1>MindTram - My Profile</h1>
 
         Username: <input type="text" id="username" /></br></br>
         Password:  <input type="password" id="password" /></br></br>
         Email   : <input type="email" id="email" /></br></br>
         Phone   : <input type="tel" id="phone" /></br></br>
-        Profile Photo: <img id="profileimage" src="images/profile.png"/><br/><br />
+        Profile Photo: <img id="profileimage" style="border-radius: 50%" src="images/466.GIF"/><br/><br />
         <input type="file" id="profilePhotoFileUpload">
         <button onclick="updateprofile()">Save Changes</button>
         <img style="display:none" id="loader" src="images/466.GIF" />

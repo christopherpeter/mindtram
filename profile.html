@@ -15,16 +15,17 @@
 <body>
 
     <div id="main">
-        <h1>MindTram - Register</h1>
+        <h1>MindTram - My Profile</h1>
 
         Username: <input type="text" id="username" /></br></br>
         Password:  <input type="password" id="password" /></br></br>
         Email   : <input type="email" id="email" /></br></br>
         Phone   : <input type="tel" id="phone" /></br></br>
-        Profile Photo: <input type="file" id="profilePhotoFileUpload">
-        <button onclick="register()">Submit</button>
+        Profile Photo: <img id="profileimage" src="images/profile.png"/><br/><br />
+        <input type="file" id="profilePhotoFileUpload">
+        <button onclick="updateprofile()">Save Changes</button>
         <img style="display:none" id="loader" src="images/466.GIF" />
-       
+
     </div>
 
 </body>

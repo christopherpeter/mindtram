@@ -1,4 +1,6 @@
-﻿function loadquestionpreliminary() {
+﻿
+var urlsplit = "";
+function loadquestionpreliminary() {
     var userimage = "";
     var query1 = new Parse.Query("userprofiles");
     query1.equalTo("userid", Parse.User.current().id);
@@ -18,7 +20,7 @@
     });
 
 
-    var urlsplit = window.location.href.split("?");
+     urlsplit = window.location.href.split("?");
 
     var question = Parse.Object.extend("questionare");
     var query = new Parse.Query(question);
@@ -31,7 +33,8 @@
 
             var output = "";
             for (var i = 0; i < question.length; i++) {
-                var object = question[i];
+
+                var object = question[i];               
 
                 $("#question").val(object.get('question'));
                 $("#optiona").val(object.get('option1'));
@@ -39,11 +42,10 @@
                 $("#optionc").val(object.get('option3'));
                 $("#optiond").val(object.get('option4'));
                 $("#answer").val(object.get('correctanswer'));
-                $("#startdate").val(object.get('startdate'));
-                $("#enddate").val(object.get('enddate'));
+                $("#startdate").val((object.get('startdate').getMonth() + 1) + '/' + object.get('startdate').getDate() + '/' + object.get('startdate').getFullYear());
+                $("#enddate").val((object.get('enddate').getMonth() + 1) + '/' + object.get('enddate').getDate() + '/' + object.get('enddate').getFullYear());
 
             }
-
 
         },
         error: function (object, error) {
@@ -73,7 +75,7 @@ function savequestion() {
     question.set("startdate", startdate);
     question.set("enddate", enddate);
 
-    question.save(null, {
+    question.save(urlsplit[1], {
         success: function (question) {
             // Execute any logic that should take place after the object is saved.
             alert('Question submitted with ID: ' + question.id);

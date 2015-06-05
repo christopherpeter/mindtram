@@ -28,8 +28,9 @@
             var output="";
           for (var i = 0; i < questions.length; i++) {
                 var object = questions[i];
-
-                output = output + "<b>Question " + (i + 1) + "</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#'>Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#'>Delete</a><br/><br/>";
+               
+               
+                output = output + "<b>Question " + (i + 1) + "</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='editquestion.html+?" + object.id + "' >Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick=deletequestion('" + object.id + "')>Delete</a><br/><br/>";
                 output = output + "<label>" + object.get('question') + "</label><br/><br/>"
                 output = output + "Option A  -<label>" + object.get('option1') + "</label><br/><br/>"
                 output = output + "Option B  -<label>" + object.get('option2') + "</label><br/><br/>"
@@ -47,6 +48,34 @@
             alert("Error: " + error.code + " " + error.message);
         }
     });
+}
+
+function deletequestion(questionid) {
+  
+    var question = Parse.Object.extend("questionare");
+    var query = new Parse.Query(question);
+    query.get(questionid, {
+        success: function (myObj) {
+            // The object was retrieved successfully.
+            myObj.destroy({
+                success: function (myObj) {
+                    alert("question deleted successfully!")
+                    location.reload();
+                },
+                error: function (myObj, error) {
+                    alert('Failed to create new object, with error code: ' + error.message);
+                    // error is a Parse.Error with an error code and message.
+                }
+            });
+        },
+        error: function (object, error) {
+            // The object was not retrieved successfully.
+            // error is a Parse.Error with an error code and description.
+        }
+    });
+
+
+
 }
 
 function logout()

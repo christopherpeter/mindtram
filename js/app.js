@@ -189,6 +189,7 @@ function updateprofile() {
 function loadstatistics()
 {
 
+    
     var query = new Parse.Query("Session");   
     query.find({
         success: function (result) {                    
@@ -222,5 +223,27 @@ function loadstatistics()
             // Something went wrong
         }
     });
+
+
+    var userimage = "";
+    var query4 = new Parse.Query("userprofiles");
+    query4.equalTo("userid", "xW6H7fY8CR");
+    query4.find({
+        success: function (result) {
+
+            for (var i = 0; i < result.length; i++) {
+                var object = result[i];
+
+                userimage = object.get("profileimage").url();
+                $('#leaderimage')[0].src = userimage;
+
+                $("#leadername").html("Chris");
+            }
+        },
+        error: function (error) {
+            // Something went wrong
+        }
+    });
+
 
 }

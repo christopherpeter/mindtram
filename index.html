@@ -16,9 +16,9 @@
 
 </head>
 
-<body>
+<body onload="loadstatistics()">
   
-  <div id="main" >
+  <div id="main">
 
       <img src="images/logo.png" /> <br/> <br/>
      
@@ -27,7 +27,13 @@
          <button onclick="validateuser()">Login</button>
          <a href="register.html">SignUp</a>
          <img id="loader" style="display:none" src="images/466.GIF" />
-     
+
+      </br></br></br></br></br>
+
+
+      <h2>Total Users : <label id="totalusers">0</label></h2>
+      <h2>Total Number of connections :<label id="usersonline">0</label></h2>
+      <h2>Total Number of Questions :<label id="totalquestions">0</label></h2>
   </div>
 
   

@@ -185,3 +185,42 @@ function updateprofile() {
         }
     });
 }
+
+function loadstatistics()
+{
+
+    var query = new Parse.Query("Session");   
+    query.find({
+        success: function (result) {                    
+            $('#usersonline').html(result.length);
+           
+        },
+        error: function (error) {
+            // Something went wrong
+        }
+    });
+
+    var query1 = new Parse.Query("User");
+    query1.find({
+        success: function (result) {
+            $('#totalusers').html(result.length);
+
+        },
+        error: function (error) {
+            // Something went wrong
+        }
+    });
+
+
+    var query3 = new Parse.Query("questionare");
+    query3.find({
+        success: function (result) {
+            $('#totalquestions').html(result.length);
+
+        },
+        error: function (error) {
+            // Something went wrong
+        }
+    });
+
+}

@@ -30,7 +30,7 @@
                 var object = questions[i];
                
                
-                output = output + "<b>Question " + (i + 1) + "</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='editquestion.html+?" + object.id + "' >Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick=deletequestion('" + object.id + "')>Delete</a><br/><br/>";
+                output = output + "<b>Question " + (i + 1) + "</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='editquestion.html?" + object.id + "' >Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick=deletequestion('" + object.id + "')>Delete</a><br/><br/>";
                 output = output + "<label>" + object.get('question') + "</label><br/><br/>"
                 output = output + "Option A  -<label>" + object.get('option1') + "</label><br/><br/>"
                 output = output + "Option B  -<label>" + object.get('option2') + "</label><br/><br/>"
@@ -73,8 +73,6 @@ function deletequestion(questionid) {
             // error is a Parse.Error with an error code and description.
         }
     });
-
-
 
 }
 

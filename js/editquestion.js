@@ -18,6 +18,41 @@
     });
 
 
+    var urlsplit = window.location.href.split("?");
+
+    var question = Parse.Object.extend("questionare");
+    var query = new Parse.Query(question);
+
+    query.equalTo("objectId", urlsplit[1]);
+    query.find({
+        success: function (question) {
+
+            //  alert(JSON.stringify(profile));
+
+            var output = "";
+            for (var i = 0; i < question.length; i++) {
+                var object = question[i];
+
+                $("#question").val(object.get('question'));
+                $("#optiona").val(object.get('option1'));
+                $("#optionb").val(object.get('option2'));
+                $("#optionc").val(object.get('option3'));
+                $("#optiond").val(object.get('option4'));
+                $("#answer").val(object.get('correctanswer'));
+                $("#startdate").val(object.get('startdate'));
+                $("#enddate").val(object.get('enddate'));
+
+            }
+
+
+        },
+        error: function (object, error) {
+            // The object was not retrieved successfully.
+            // error is a Parse.Error with an error code and message.
+            alert("Error: " + error.code + " " + error.message);
+        }
+    });
+
 }
 
 function savequestion() {

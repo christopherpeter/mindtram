@@ -39,12 +39,14 @@ function submitquestion()
 
     question.set("startdate", startdate);
     question.set("enddate", enddate);
+   
+    question.set("tags", $("#mySingleField").val());
 
     question.save(null, {
         success: function (question) {
             // Execute any logic that should take place after the object is saved.
             alert('Question submitted with ID: ' + question.id);
-           
+            window.location.href = "myquestions.html";
         },
         error: function (question, error) {
             // Execute any logic that should take place if the save fails.

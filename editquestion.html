@@ -8,13 +8,22 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/styles.css">
+    <link href="css/jquery.tagit.css" rel="stylesheet" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
     <script src="js/intialize.js"></script>
     <script src="js/editquestion.js"></script>
+    <script src="js/tag-it.min.js"></script>
     <script>
-    $(function() {
+        $(function () {
+            var sampleTags = ['c++', 'java', 'php', 'coldfusion', 'javascript', 'asp', 'ruby', 'python', 'c', 'scala', 'groovy', 'haskell', 'perl', 'erlang', 'apl', 'cobol', 'go', 'lua', '.net', 'Android', 'IOS'];
+            $('#myTags').tagit({
+                availableTags: sampleTags,
+                // This will make Tag-it submit a single form value, as a comma-delimited field.
+                singleField: true,
+                singleFieldNode: $('#mySingleField')
+            });
         $( "#startdate" ).datepicker();
         $( "#enddate" ).datepicker();
     });
@@ -30,7 +39,8 @@
         <img id="profileimage" style="border-radius: 50%;width:100px;height:100px;" />
         <h1>MindTram - Edit Question</h1>
 
-        <textarea id="question" width="250px"></textarea></br></br>
+        Tag question: <ul id="myTags"></ul><input type="hidden" id="mySingleField" />
+        Question: <textarea id="question" width="250px"></textarea></br></br>
         Option 1:  <textarea id="optiona" width="250px"></textarea></br></br>
         Option 2:  <textarea id="optionb" width="250px"></textarea></br></br>
         Option 3:  <textarea id="optionc" width="250px"></textarea></br></br>
@@ -41,7 +51,7 @@
         Start Date: <input type="text" id="startdate" width="250px" /></br></br>
         End Date: <input type="text" id="enddate" width="250px" /></br></br>
 
-        <button onclick="submitquestion()">Submit</button>
+        <button onclick="savequestion()">Submit</button>
 
 
     </div>

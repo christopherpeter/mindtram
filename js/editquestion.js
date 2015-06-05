@@ -20,7 +20,7 @@ function loadquestionpreliminary() {
     });
 
 
-     urlsplit = window.location.href.split("?");
+    urlsplit = window.location.href.split("?");
 
     var question = Parse.Object.extend("questionare");
     var query = new Parse.Query(question);
@@ -45,6 +45,14 @@ function loadquestionpreliminary() {
                 $("#startdate").val((object.get('startdate').getMonth() + 1) + '/' + object.get('startdate').getDate() + '/' + object.get('startdate').getFullYear());
                 $("#enddate").val((object.get('enddate').getMonth() + 1) + '/' + object.get('enddate').getDate() + '/' + object.get('enddate').getFullYear());
 
+                var splittag = object.get("tags").split(",");
+
+                for (var i = 0; i < splittag.length; i++)
+                {
+                    $('#myTags').tagit('createTag', splittag[i]);
+                }
+
+                //alert($("#mySingleField").val());
             }
 
         },
@@ -62,6 +70,7 @@ function savequestion() {
     var question = Parse.Object.extend("questionare");
     var question = new question();
 
+    question.set("objectId", urlsplit[1]);
     question.set("userid", Parse.User.current().id);
     question.set("question", $("#question").val());
     question.set("option1", $("#optiona").val());
@@ -74,11 +83,13 @@ function savequestion() {
 
     question.set("startdate", startdate);
     question.set("enddate", enddate);
-
-    question.save(urlsplit[1], {
+    question.set("tags", $("#mySingleField").val());
+    question.save(null, {
         success: function (question) {
             // Execute any logic that should take place after the object is saved.
-            alert('Question submitted with ID: ' + question.id);
+            alert('Question Updated successfully!');
+
+            window.location.href = "myquestions.html";
 
         },
         error: function (question, error) {

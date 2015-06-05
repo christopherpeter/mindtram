@@ -1,6 +1,7 @@
 ﻿
 function validateuser(){
 
+    $("#loader").show();
 
     var currentUser = Parse.User.current();
     if (currentUser) {
@@ -15,7 +16,7 @@ function validateuser(){
             },
             error: function (user, error) {
                 alert("Login Failed: Pls. check your credentials");
-
+                $("#loader").hide();
             }
         }); 
 }
@@ -61,6 +62,7 @@ function register()
                     // Execute any logic that should take place if the save fails.
                     // error is a Parse.Error with an error code and message.
                     alert('Failed to create new object, with error code: ' + error.message);
+                    $("#loader").hide();
                 }
             });
            
@@ -68,6 +70,7 @@ function register()
         error: function (user, error) {
             // Show the error message somewhere and let the user try again.
             alert("Error: " + error.code + " " + error.message);
+            $("#loader").hide();
         }
     });
 }
@@ -169,6 +172,7 @@ function updateprofile() {
                         // Execute any logic that should take place if the save fails.
                         // error is a Parse.Error with an error code and message.
                         alert('Failed to create new object, with error code: ' + error.message);
+                        $("#loader").hide();
                     }
                 });
             }            
@@ -177,6 +181,7 @@ function updateprofile() {
         error: function (user, error) {
             // Show the error message somewhere and let the user try again.
             alert("Error: " + error.code + " " + error.message);
+            $("#loader").hide();
         }
     });
 }

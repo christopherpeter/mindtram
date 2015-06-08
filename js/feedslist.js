@@ -14,9 +14,8 @@
                 var object = questions[i];
                
                 output = output + ' <div class="panel panel-default">';
-                output = output + ' <div class="panel-heading"><h4>Question was posted by  ' + object.get("userprofileid").get("firstname") + ' ' + object.get("userprofileid").get("lastname") + '</h4><img src="' + object.get("userprofileid").get("profileimage").url() + '" class="img-circle pull-right"></div>';
+                output = output + ' <div class="panel-heading"><h4>Question was posted by  ' + object.get("userprofileid").get("firstname") + ' ' + object.get("userprofileid").get("lastname") + '</h4><img src="' + object.get("userprofileid").get("profileimage").url() + '"  style="border-radius:50%;width:50px;float:right;margin-top:-15px"></div>';
                 output = output + ' <div class="panel-body">';
-                output = output + '<p><img src="' + object.get("userprofileid").get("profileimage").url() + '" class="img-circle pull-right">';
                 output = output + ' <span>' + object.get('question') + '</span>';
                 output = output + ' <div class="clearfix"></div>';
                 output = output + ' <hr>';

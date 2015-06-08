@@ -3,7 +3,13 @@
     var questions = Parse.Object.extend("questionare");
     var query = new Parse.Query(questions);
 
-    query.equalTo("userid", Parse.User.current().id);
+    query.equalTo("userid", {
+        __type: "Pointer",
+        className: "_User",
+        objectId: Parse.User.current().id
+    }).descending("updatedAt");
+
+    //query.equalTo("userid", Parse.User.current().id);
     query.find({
         success: function (questions) {
             var output = "";

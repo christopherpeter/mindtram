@@ -7,14 +7,36 @@ function validateuser(){
     if (currentUser) {
         // do stuff with the user
         Parse.User.logOut();
-    }
-
-        
+    }        
 
         Parse.User.logIn($("#username").val(), $("#password").val(), {
-            success: function (user) {
-                //alert(JSON.stringify(user));
-               window.location.href = "myquestions.html";
+            success: function (user) {                               
+
+                            var query1 = new Parse.Query("userprofiles");
+                            query1.equalTo("userid", {
+                                __type: "Pointer",
+                                className: "_User",
+                                objectId: Parse.User.current().id
+                            });
+                            query1.find({
+                                success: function (result) {
+
+                                    for (var i = 0; i < result.length; i++) {
+                                        var object = result[i];
+                                       
+                                        localStorage.setItem("profileid", object.id);
+                                        localStorage.setItem("firstname", object.get('firstname'));
+                                        localStorage.setItem("lastname", object.get('lastname'));
+                                        window.location.href = "myquestions.html";
+                                        }
+                                },
+                                error: function (error) {
+                                    // Something went wrong
+                                }
+                            });
+
+                       
+               
             },
             error: function (user, error) {
 
@@ -32,7 +54,7 @@ function register()
     var user = new Parse.User();
     user.set("username", $("#username").val());
     user.set("password", $("#password").val());
-    user.set("email", $("#email").val());
+    user.set("email", $("#email").val());   
 
     // other fields can be set just like with Parse.Object
     user.set("phone", $("#phone").val());   
@@ -43,9 +65,13 @@ function register()
             var profile = Parse.Object.extend("userprofiles");
             var profile = new profile();
 
-            profile.set("userid", Parse.User.current().id);
-                        
-
+            profile.set("userid", {
+                __type: "Pointer",
+                className: "_User",
+                objectId: Parse.User.current().id
+            });
+            profile.set("firstname", $("#firstname").val());
+            profile.set("lastname", $("#lastname").val());
             var fileUploadControl = $("#profilePhotoFileUpload")[0];
             if (fileUploadControl.files.length > 0) {
                 var file = fileUploadControl.files[0];
@@ -101,7 +127,11 @@ function loadprofile()
                 $("#phone").val(object.get('phone'));
 
                 var query1 = new Parse.Query("userprofiles");
-                query1.equalTo("userid", Parse.User.current().id);
+                query1.equalTo("userid", {
+                    __type: "Pointer",
+                    className: "_User",
+                    objectId: Parse.User.current().id
+                });
                 query1.find({
                     success: function (result) {
 
@@ -110,6 +140,9 @@ function loadprofile()
 
                             userimage = object.get("profileimage").url();
                             $('#profileimage')[0].src = userimage;
+
+                            $("#firstname").val(object.get('firstname'));
+                            $("#lastname").val(object.get('lastname'));
                         }
                     },
                     error: function (error) {
@@ -152,7 +185,11 @@ function updateprofile() {
           
             var profile = Parse.Object.extend("userprofiles");
             var profile = new profile();
-            profile.set("userid", Parse.User.current().id);
+            profile.set("userid", {
+                __type: "Pointer",
+                className: "_User",
+                objectId: Parse.User.current().id
+            });
 
             var fileUploadControl = $("#profilePhotoFileUpload")[0];
             if (fileUploadControl.files.length > 0) {
@@ -165,6 +202,9 @@ function updateprofile() {
                 var parseFile = new Parse.File(name, file);
 
                 profile.set("profileimage", parseFile);
+
+                user.set("firstname", $("#firstname").val());
+                user.set("lastname", $("#lastname").val());
 
                 profile.save(null, {
                     success: function (profile) {

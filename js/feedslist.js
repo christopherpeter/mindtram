@@ -1,11 +1,14 @@
 ﻿function loadfeeds()
 {
     var questions = Parse.Object.extend("questionare");
+  
     var query = new Parse.Query(questions);
-
-    query.equalTo("userid", Parse.User.current().id);
+    query.include("userid");
+    query.descending("updatedAt");
     query.find({
         success: function (questions) {
+
+           
             var output = "";
             for (var i = 0; i < questions.length; i++) {
                 var object = questions[i];

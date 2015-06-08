@@ -23,7 +23,7 @@ function loadquestionpreliminary() {
                 $("#optionb").val(object.get('option2'));
                 $("#optionc").val(object.get('option3'));
                 $("#optiond").val(object.get('option4'));
-                $("#answer").val(object.get('correctanswer'));
+                $("#answer option[value=" + object.get('correctanswer') + "]").attr('selected', 'selected');               
                 $("#startdate").val((object.get('startdate').getMonth() + 1) + '/' + object.get('startdate').getDate() + '/' + object.get('startdate').getFullYear());
                 $("#enddate").val((object.get('enddate').getMonth() + 1) + '/' + object.get('enddate').getDate() + '/' + object.get('enddate').getFullYear());
 
@@ -53,15 +53,27 @@ function savequestion() {
     var question = new question();
 
     question.set("objectId", urlsplit[1]);
-    question.set("userid", Parse.User.current().id);
+    question.set("userid", {
+        __type: "Pointer",
+        className: "_User",
+        objectId: Parse.User.current().id
+    });
     question.set("question", $("#question").val());
     question.set("option1", $("#optiona").val());
     question.set("option2", $("#optionb").val());
     question.set("option3", $("#optionc").val());
     question.set("option4", $("#optiond").val());
-    question.set("correctanswer", $("#answer").val());
+    var e = document.getElementById("answer");
+    var answer = e.options[e.selectedIndex].value;
+    question.set("correctanswer", answer);
     var startdate = new Date($("#startdate").val());
     var enddate = new Date($("#enddate").val());
+
+    question.set("userprofileid", {
+        __type: "Pointer",
+        className: "userprofiles",
+        objectId: localStorage.getItem("profileid")
+    });
 
     question.set("startdate", startdate);
     question.set("enddate", enddate);

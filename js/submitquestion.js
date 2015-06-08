@@ -6,13 +6,27 @@ function submitquestion()
     var question = Parse.Object.extend("questionare");
     var question = new question();
 
-    question.set("userid", Parse.User.current().id);
+    question.set("userid", {
+        __type: "Pointer",
+        className: "_User",
+        objectId: Parse.User.current().id
+    });
+
+    question.set("userprofileid", {
+        __type: "Pointer",
+        className: "userprofiles",
+        objectId: localStorage.getItem("profileid")
+    });
+       
+
     question.set("question", $("#question").val());
     question.set("option1", $("#optiona").val());
     question.set("option2", $("#optionb").val());
     question.set("option3", $("#optionc").val());
     question.set("option4", $("#optiond").val());
-    question.set("correctanswer", $("#answer").val());
+    var e = document.getElementById("answer");
+    var answer = e.options[e.selectedIndex].value;
+    question.set("correctanswer", answer);
     var startdate = new Date($("#startdate").val());
     var enddate = new Date($("#enddate").val());
 

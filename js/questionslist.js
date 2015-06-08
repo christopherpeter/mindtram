@@ -23,9 +23,7 @@
                 output = output + ' <hr>'
                 output = output + ' <p>Correct Answer:' + object.get('correctanswer') + '</p>';
                 output = output + ' </div>';
-                output = output + ' </div>';
-
-            
+                output = output + ' </div>';            
 
             }
 

@@ -11,7 +11,7 @@
                 var object = questions[i];
 
                 output = output + ' <div class="panel panel-default">';
-                output = output + ' <div class="panel-heading"><a onclick=deletequestion("' + object.id + '") style="margin-left:15px"  class="pull-right">Delete</a><a href="editquestion.html?' + object.id + '" class="pull-right">Edit</a> <h4>Question ' + (i + 1) + '</h4></div>';
+                output = output + ' <div class="panel-heading"><h4>Question ' + (i + 1) + '</h4></div>';
                 output = output + ' <div class="panel-body">';
                 output = output + ' <span>' + object.get('question') + '</span>';
                 output = output + ' <div class="clearfix"></div>';
@@ -22,9 +22,17 @@
                 output = output + "<p>Option D -<label>" + object.get('option4') + "</label></p>"
                 output = output + ' <hr>'
                 output = output + ' <p>Correct Answer:' + object.get('correctanswer') + '</p>';
+                output = output + '<hr><form>';
+                output = output + '<select id="answeroption"><option value="no">Select Your Answer</option><option value="1">Option A</option><option value="2">Option B</option><option value="3">Option C</option><option value="4">Option D</option></select>';
+                output = output + '<div class="input-group">';                
+                output = output + '<input type="text" class="form-control" id="' + object.id + '_comment" placeholder="Comment on your answer">';
+                output = output + '<div class="input-group-btn">';
+                output = output + '<button class="btn btn-default" onclick="saveanswer("' + object.id + '")"><i class="glyphicon glyphicon-ok"></i></button>';
+                output = output + '</div>';                
+                output = output + '</div>';
+                output = output + '</form>';
                 output = output + ' </div>';
                 output = output + ' </div>';
-
             }
 
             $("#questions").html(output);
@@ -35,4 +43,10 @@
             alert("Error: " + error.code + " " + error.message);
         }
     });
+}
+
+
+function saveanswer(questionid)
+{
+
 }

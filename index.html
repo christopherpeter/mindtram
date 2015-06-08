@@ -1,42 +1,51 @@
-﻿<!doctype html>
-<html>
+﻿<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
+    <meta charset="utf-8">
+    <title>MindTram- Knowledge Is Wealth</title>
+    <meta name="description" content="My Parse App">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+       <!-- Bootstrap core CSS -->
+    
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
 
-  <title>MindTram- Knowledge Is Wealth</title>
-  <meta name="description" content="My Parse App">
-  <meta name="viewport" content="width=device-width">
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/styles.css">
+    <link href="css/signin.css" rel="stylesheet" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
+    <script src="js/intialize.js"></script>
+    <script src="js/app.js"></script>
 
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
-  <script src="js/intialize.js"></script>
-  <script src="js/app.js"></script>
 
 </head>
 
-<body onload="loadstatistics()">
-  
-  <div id="main">
+<body>
 
-      <img src="images/logo.png" /> <br/> <br/>
-     
-          Username: <input type="text" id="username"  /></br></br>
-          Password:  <input type="password" id="password"  /></br></br>
-         <button onclick="validateuser()">Login</button>
-         <a href="register.html">SignUp</a>
-         <img id="loader" style="display:none" src="images/466.GIF" />
-         <div style="float:right"><span>Scoreboard Leader for June-2015</span><br/><img id="leaderimage" style="border-radius: 50%;width:250px;height:250px;" /><br/><span style="margin-left:100px" id="leadername"></span></div>
-         </br></br></br></br></br>
+    <div class="container">
+
+        <img src="images/logo.png" /> <br /> <br />
+
+        <form class="form-signin" onsubmit="return false;">
+            <h2 class="form-signin-heading">Please sign in</h2>
+            <label for="inputEmail" class="sr-only">Email address</label>
+            <input type="text" id="username" class="form-control" placeholder="Username" required autofocus><br />
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" id="password" class="form-control" placeholder="Password" required>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" onclick="validateuser()">Sign in</button>
+
+            <a href="register.html">Click here to register</a><br />
+            <img id="loader" style="display:none" src="images/716.GIF" />
 
 
-      <h2>Total Users : <label id="totalusers">0</label></h2>
-      <h2>Total Number of Connections :<label id="usersonline">0</label></h2>
-      <h2>Total Number of Questions :<label id="totalquestions">0</label></h2>
-  </div>
+        </form>
 
-  
+    </div> <!-- /container -->
+
 </body>
-
 </html>

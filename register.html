@@ -5,8 +5,7 @@
     <title>MindTram- Knowledge Is Wealth</title>
     <meta name="description" content="My Parse App">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/styles.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
     <script src="js/intialize.js"></script>
@@ -14,17 +13,61 @@
 </head>
 <body>
 
-    <div id="main">
-        <h1>MindTram - Register</h1>
+   <div class="container">
+        <div class="page-header">
+            <h1>Registration form</h1>
+        </div>
+        <!-- Registration form - START -->
+        <div class="container">
+            <div class="row">
+                <form role="form" onsubmit="return false;">
+                    <div class="col-lg-6">
+                        <div class="well well-sm"><strong><span class="glyphicon glyphicon-asterisk"></span>Required Field</strong></div>
+                        <div class="form-group">
+                            <label for="InputName">Enter Name</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="InputName" id="username" placeholder="Enter Username" required>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="InputEmail">Enter Password</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="InputEmail">Enter Email</label>
+                            <div class="input-group">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" required>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                            </div>
+                        </div>
 
-        Username: <input type="text" id="username" /></br></br>
-        Password:  <input type="password" id="password" /></br></br>
-        Email   : <input type="email" id="email" /></br></br>
-        Phone   : <input type="tel" id="phone" /></br></br>
-        Profile Photo: <input type="file" id="profilePhotoFileUpload">
-        <button onclick="register()">Submit</button>
-        <img style="display:none" id="loader" src="images/466.GIF" />
-       
+                        <div class="form-group">
+                            <label for="InputEmail">Enter Phone</label>
+                            <div class="input-group">
+                                <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter Phone" required>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="InputEmail">Select Profile Image</label>
+                            <div class="input-group">
+                                <input type="file" id="profilePhotoFileUpload" required>
+                                </span>
+                            </div>
+                        </div>
+
+                        <input type="submit" name="submit" id="submit" value="Submit" onclick="register()" class="btn btn-info pull-right"><img style="display:none" id="loader" src="images/466.GIF" />
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+        <!-- Registration form - END -->
     </div>
 
 </body>

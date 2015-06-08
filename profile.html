@@ -5,8 +5,7 @@
     <title>MindTram- Knowledge Is Wealth</title>
     <meta name="description" content="My Parse App">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/styles.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
     <script src="js/intialize.js"></script>
@@ -14,23 +13,94 @@
 </head>
 <body onload="loadprofile()">
 
-    <div id="main">
-        <a href="#" onclick="logout()" style="float:right">Logout</a>
-        <a href="profile.html" style="float:right;margin-right:15px">Profile</a>&nbsp;&nbsp;&nbsp;        
-        <a href="questionare.html" style="float:right;margin-right:15px">Ask Question</a>&nbsp;&nbsp;&nbsp;
-        <a href="myquestions.html" style="float:right;margin-right:15px">My Questions</a>&nbsp;&nbsp;&nbsp;
-        <h1>MindTram - My Profile</h1>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">MindTram</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="myquestions.html" style="float:right;margin-right:15px">My Questions</a></li>
+                    <li><a href="challengefeeds.html" style="float:right;margin-right:15px">Feeds</a></li>
+                    <li><a href="questionare.html" style="float:right;margin-right:15px">Ask Question</a></li>
+                    <li><a href="profile.html" style="float:right;margin-right:15px">Profile</a></li>
+                    <li><a href="#" onclick="logout()" style="float:right">Logout</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </nav>
 
-        Username: <input type="text" id="username" /></br></br>
-        Password:  <input type="password" id="password" /></br></br>
-        Email   : <input type="email" id="email" /></br></br>
-        Phone   : <input type="tel" id="phone" /></br></br>
-        Profile Photo: <img id="profileimage" style="border-radius: 50%" src="images/466.GIF"/><br/><br />
-        <input type="file" id="profilePhotoFileUpload">
-        <button onclick="updateprofile()">Save Changes</button>
-        <img style="display:none" id="loader" src="images/466.GIF" />
+    <div class="container">
+        <div class="page-header">
+            <h1>My Profile</h1>
+        </div>
+        <!-- Registration form - START -->
+        <div class="container">
+            <div class="row">
+                <form role="form" onsubmit="return false;">
+                    <div class="col-lg-6">
+                        <div class="well well-sm"><strong><span class="glyphicon glyphicon-asterisk"></span>Required Field</strong></div>
+                        <div class="form-group">
+                            <label for="InputName">Enter Name</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="InputName" id="username" placeholder="Enter Username" required>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="InputEmail">Enter Password</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="InputEmail">Enter Email</label>
+                            <div class="input-group">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" required>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                            </div>
+                        </div>
 
+                        <div class="form-group">
+                            <label for="InputEmail">Enter Phone</label>
+                            <div class="input-group">
+                                <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter Phone" required>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+
+                            <div class="input-group">
+                                <img id="profileimage" style="border-radius: 50%;width:100px;height:100px;" /><br /><br />
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="InputEmail">Select Profile Image</label>
+                            <div class="input-group">
+                                <input type="file" id="profilePhotoFileUpload" required>
+                                </span>
+                            </div>
+                        </div>
+
+                        <input type="submit" name="submit" id="submit" value="Submit" onclick="updateprofile()" class="btn btn-info pull-right"><img style="display:none" id="loader" src="images/466.GIF" />
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <!-- Registration form - END -->
     </div>
 
 </body>
 </html>
+

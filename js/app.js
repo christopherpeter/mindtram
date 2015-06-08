@@ -9,13 +9,17 @@ function validateuser(){
         Parse.User.logOut();
     }
 
+        
+
         Parse.User.logIn($("#username").val(), $("#password").val(), {
             success: function (user) {
                 //alert(JSON.stringify(user));
                window.location.href = "myquestions.html";
             },
             error: function (user, error) {
-                alert("Login Failed: Pls. check your credentials");
+
+                alert('Failed to create new object, with error code: ' + error.message);
+                //alert("Login Failed: Pls. check your credentials");
                 $("#loader").hide();
             }
         }); 
@@ -187,63 +191,8 @@ function updateprofile() {
 }
 
 function loadstatistics()
-{
+{   
 
     
-    var query = new Parse.Query("Session");   
-    query.find({
-        success: function (result) {                    
-            $('#usersonline').html(result.length);
-           
-        },
-        error: function (error) {
-            // Something went wrong
-        }
-    });
-
-    var query1 = new Parse.Query("User");
-    query1.find({
-        success: function (result) {
-            $('#totalusers').html(result.length);
-
-        },
-        error: function (error) {
-            // Something went wrong
-        }
-    });
-
-
-    var query3 = new Parse.Query("questionare");
-    query3.find({
-        success: function (result) {
-            $('#totalquestions').html(result.length);
-
-        },
-        error: function (error) {
-            // Something went wrong
-        }
-    });
-
-
-    var userimage = "";
-    var query4 = new Parse.Query("userprofiles");
-    query4.equalTo("userid", "xW6H7fY8CR");
-    query4.find({
-        success: function (result) {
-
-            for (var i = 0; i < result.length; i++) {
-                var object = result[i];
-
-                userimage = object.get("profileimage").url();
-                $('#leaderimage')[0].src = userimage;
-
-                $("#leadername").html("Chris");
-            }
-        },
-        error: function (error) {
-            // Something went wrong
-        }
-    });
-
 
 }

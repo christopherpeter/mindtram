@@ -4,15 +4,16 @@
     <meta charset="utf-8">
     <title>MindTram- Knowledge Is Wealth</title>
     <meta name="description" content="My Parse App">
-    <meta name="viewport" content="width=device-width">
+    <meta name=" viewport" content="width=device-width">
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/styles.css">
+
     <link href="css/jquery.tagit.css" rel="stylesheet" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
     <script src="js/intialize.js"></script>
+    <script src="js/app.js"></script>
     <script src="js/editquestion.js"></script>
     <script src="js/tag-it.min.js"></script>
     <script>
@@ -24,37 +25,129 @@
                 singleField: true,
                 singleFieldNode: $('#mySingleField')
             });
-        $( "#startdate" ).datepicker();
-        $( "#enddate" ).datepicker();
-    });
+            $("#startdate").datepicker();
+            $("#enddate").datepicker();
+        });
     </script>
 </head>
 <body onload="loadquestionpreliminary()">
 
-    <div id="main">
-        <a href="#" onclick="logout()" style="float:right">Logout</a>
-        <a href="profile.html" style="float:right;margin-right:15px">Profile</a>&nbsp;&nbsp;&nbsp;
-        <a href="questionare.html" style="float:right;margin-right:15px">Ask Question</a>&nbsp;&nbsp;&nbsp;
-        <a href="myquestions.html" style="float:right;margin-right:15px">My Questions</a>&nbsp;&nbsp;&nbsp;
-        <img id="profileimage" style="border-radius: 50%;width:100px;height:100px;" />
-        <h1>MindTram - Edit Question</h1>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">MindTram</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="myquestions.html" style="float:right;margin-right:15px">My Questions</a></li>
+                    <li><a href="challengefeeds.html" style="float:right;margin-right:15px">Feeds</a></li>
+                    <li><a href="questionare.html" style="float:right;margin-right:15px">Ask Question</a></li>
+                    <li><a href="profile.html" style="float:right;margin-right:15px">Profile</a></li>
+                    <li><a href="#" onclick="logout()" style="float:right">Logout</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </nav>
 
-        Tag question: <ul id="myTags"></ul><input type="hidden" id="mySingleField" />
-        Question: <textarea id="question" width="250px"></textarea></br></br>
-        Option 1:  <textarea id="optiona" width="250px"></textarea></br></br>
-        Option 2:  <textarea id="optionb" width="250px"></textarea></br></br>
-        Option 3:  <textarea id="optionc" width="250px"></textarea></br></br>
-        Option 4:  <textarea id="optiond" width="250px"></textarea></br></br>
+
+    <!-- Registration form - START -->
+    <div class="container">
+
+        <div class="row">
+            <div class="page-header">
+                <h1>Ask Question</h1>
+            </div>
+            <form role="form" onsubmit="return false;">
+                <div class="col-lg-6">
+                    <div class="well well-sm"><strong><span class="glyphicon glyphicon-asterisk"></span>Required Field</strong></div>
+                    <div class="form-group">
+                        <label for="InputName">Tag Question</label>
+                        <div class="input-group">
+                            <ul id="myTags"></ul><input type="text" id="mySingleField" style="display:none" />
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="InputEmail">Enter Question</label>
+                        <div class="input-group">
+                            <textarea class="form-control" id="question"></textarea>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="InputEmail">Enter Option A</label>
+                        <div class="input-group">
+                            <textarea class="form-control" id="optiona"></textarea>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="InputEmail">Enter Option B</label>
+                        <div class="input-group">
+                            <textarea class="form-control" id="optionb"></textarea>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                    </div>
 
 
-        Answer  : <input type="number" id="answer" /></br></br>
-        Start Date: <input type="text" id="startdate" width="250px" /></br></br>
-        End Date: <input type="text" id="enddate" width="250px" /></br></br>
+                    <div class="form-group">
+                        <label for="InputEmail">Enter Option C</label>
+                        <div class="input-group">
+                            <textarea class="form-control" id="optionc"></textarea>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                    </div>
 
-        <button onclick="savequestion()">Submit</button>
+
+                    <div class="form-group">
+                        <label for="InputEmail">Enter Option D</label>
+                        <div class="input-group">
+                            <textarea class="form-control" id="optiond"></textarea>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                    </div>
 
 
+                    <div class="form-group">
+                        <label for="InputEmail">Enter The Answer</label>
+                        <div class="input-group">
+                            <input class="form-control" type="number" id="answer" />
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="InputEmail">Enter Start Date</label>
+                        <div class="input-group">
+                            <input class="form-control" type="text" id="startdate" />
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="InputEmail">Enter End Date</label>
+                        <div class="input-group">
+                            <input class="form-control" type="text" id="enddate" />
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                    </div>
+
+                    <input type="submit" name="submit" id="submit" value="Submit" onclick="savequestion()" class="btn btn-info pull-right"><img style="display:none" id="loader" src="images/466.GIF" />
+                </div>
+            </form>
+
+        </div>
     </div>
+    <!-- Registration form - END -->
+
 
 </body>
 </html>

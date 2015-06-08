@@ -9,12 +9,13 @@
     <!-- Bootstrap core CSS -->
 
     <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/listviewstyles.css" rel="stylesheet" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
     <script src="js/intialize.js"></script>
     <script src="js/app.js"></script>
     <script src="js/questionslist.js"></script>
-   
+
 </head>
 <body onload="loadquestions()">
 
@@ -36,7 +37,7 @@
                     <li><a href="myquestions.html" style="float:right;margin-right:15px">My Questions</a></li>
                     <li><a href="challengefeeds.html" style="float:right;margin-right:15px">Feeds</a></li>
                     <li><a href="questionare.html" style="float:right;margin-right:15px">Ask Question</a></li>
-                    <li ><a href="profile.html" style="float:right;margin-right:15px">Profile</a></li>
+                    <li><a href="profile.html" style="float:right;margin-right:15px">Profile</a></li>
                     <li><a href="#" onclick="logout()" style="float:right">Logout</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
@@ -44,12 +45,14 @@
     </nav>
 
     <div class="container">
-               
-        
-        <img id="profileimage" style="border-radius: 50%;width:100px;height:100px;" /> <h1>MindTram - My Questions</h1><br /><br />
 
-        <div id="questions">
-            <img src="images/466.GIF" />
+        <div class="page-header">
+            <h1>My Questions</h1>
+        </div>
+
+        <div id="questions">           
+
+            <img src="images/716.GIF" />
         </div>
 
     </div>

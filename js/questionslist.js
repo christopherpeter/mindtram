@@ -1,46 +1,35 @@
-﻿function loadquestions()
-{
-
-    var userimage = "";
-    var query1 = new Parse.Query("userprofiles");    
-    query1.equalTo("userid", Parse.User.current().id);
-    query1.find({
-        success: function (result) {
-          
-            for (var i = 0; i < result.length; i++) {
-                var object = result[i];
-               
-                userimage = object.get("profileimage").url();
-                $('#profileimage')[0].src = userimage;
-            }
-        },
-        error: function (error) {
-            // Something went wrong
-        }
-    });
+﻿function loadquestions() {
 
     var questions = Parse.Object.extend("questionare");
     var query = new Parse.Query(questions);
-    
+
     query.equalTo("userid", Parse.User.current().id);
     query.find({
         success: function (questions) {
-            var output="";
-          for (var i = 0; i < questions.length; i++) {
+            var output = "";
+            for (var i = 0; i < questions.length; i++) {
                 var object = questions[i];
-               
-               
-                output = output + "<b>Question " + (i + 1) + "</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='editquestion.html?" + object.id + "' >Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick=deletequestion('" + object.id + "')>Delete</a><br/><br/>";
-                output = output + "<label>" + object.get('question') + "</label><br/><br/>"
-                output = output + "Option A  -<label>" + object.get('option1') + "</label><br/><br/>"
-                output = output + "Option B  -<label>" + object.get('option2') + "</label><br/><br/>"
-                output = output + "Option C -<label>" + object.get('option3') + "</label><br/><br/>"
-                output = output + "Option D -<label>" + object.get('option4') + "</label><br/><br/>"
-                output = output + "Correct Answer -<label>" + object.get('correctanswer') + "</label><br/><br/><br/><br/>"
-                output = output + "<hr/>"
-          }
 
-          $("#questions").html(output);
+                output = output + ' <div class="panel panel-default">';
+                output = output + ' <div class="panel-heading"><a onclick=deletequestion("' + object.id + '") style="margin-left:15px"  class="pull-right">Delete</a><a href="editquestion.html?' + object.id + '" class="pull-right">Edit</a> <h4>Question ' + (i + 1) + '</h4></div>';
+                output = output + ' <div class="panel-body">';
+                output = output + ' <span>'+object.get('question')+'</span>';
+                output = output + ' <div class="clearfix"></div>';
+                output = output + ' <hr>';
+                output = output + "<p>Option A -<label>" + object.get('option1') + "</label></p>"
+                output = output + "<p>Option B -<label>" + object.get('option2') + "</label></p>"
+                output = output + "<p>Option C -<label>" + object.get('option3') + "</label></p>"
+                output = output + "<p>Option D -<label>" + object.get('option4') + "</label></p>"
+                output = output + ' <hr>'
+                output = output + ' <p>Correct Answer:' + object.get('correctanswer') + '</p>';
+                output = output + ' </div>';
+                output = output + ' </div>';
+
+            
+
+            }
+
+            $("#questions").html(output);
         },
         error: function (object, error) {
             // The object was not retrieved successfully.
@@ -51,7 +40,7 @@
 }
 
 function deletequestion(questionid) {
-  
+
     var question = Parse.Object.extend("questionare");
     var query = new Parse.Query(question);
     query.get(questionid, {
@@ -76,8 +65,7 @@ function deletequestion(questionid) {
 
 }
 
-function logout()
-{
+function logout() {
 
     Parse.User.logOut();
 

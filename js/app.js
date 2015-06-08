@@ -196,3 +196,11 @@ function loadstatistics()
     
 
 }
+
+function logout() {
+
+    Parse.User.logOut();
+
+    window.location.href = "index.html";
+
+}

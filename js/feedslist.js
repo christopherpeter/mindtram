@@ -23,9 +23,8 @@
                 output = output + "<p>Option B -<label>" + object.get('option2') + "</label></p>"
                 output = output + "<p>Option C -<label>" + object.get('option3') + "</label></p>"
                 output = output + "<p>Option D -<label>" + object.get('option4') + "</label></p>"
-                output = output + ' <hr>'
-                output = output + ' <p>Correct Answer:' + object.get('correctanswer') + '</p>';
-                output = output + '<hr><form>';
+                output = output + ' <hr>'               
+                output = output + '<form>';
                 output = output + '<select id="answeroption"><option value="no">Select Your Answer</option><option value="1">Option A</option><option value="2">Option B</option><option value="3">Option C</option><option value="4">Option D</option></select>';
                 output = output + '<div class="input-group">';                
                 output = output + '<input type="text" class="form-control" id="' + object.id + '_comment" placeholder="Comment on your answer">';

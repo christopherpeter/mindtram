@@ -3,7 +3,7 @@
     var questions = Parse.Object.extend("questionare");
   
     var query = new Parse.Query(questions);
-    query.include("userid");
+    query.include("userprofileid");
     query.descending("updatedAt");
     query.find({
         success: function (questions) {
@@ -12,10 +12,11 @@
             var output = "";
             for (var i = 0; i < questions.length; i++) {
                 var object = questions[i];
-
+               
                 output = output + ' <div class="panel panel-default">';
-                output = output + ' <div class="panel-heading"><h4>Question ' + (i + 1) + '</h4></div>';
+                output = output + ' <div class="panel-heading"><h4>Question was posted by  ' + object.get("userprofileid").get("firstname") + ' ' + object.get("userprofileid").get("lastname") + '</h4><img src="' + object.get("userprofileid").get("profileimage").url() + '" class="img-circle pull-right"></div>';
                 output = output + ' <div class="panel-body">';
+                output = output + '<p><img src="' + object.get("userprofileid").get("profileimage").url() + '" class="img-circle pull-right">';
                 output = output + ' <span>' + object.get('question') + '</span>';
                 output = output + ' <div class="clearfix"></div>';
                 output = output + ' <hr>';

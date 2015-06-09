@@ -27,7 +27,7 @@ function validateuser(){
                                         localStorage.setItem("profileid", object.id);
                                         localStorage.setItem("firstname", object.get('firstname'));
                                         localStorage.setItem("lastname", object.get('lastname'));
-                                        window.location.href = "myquestions.html";
+                                        window.location.href = "dashboard.html";
                                         }
                                 },
                                 error: function (error) {

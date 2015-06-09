@@ -1,14 +1,32 @@
 ﻿function loadfeeds()
 {
+
+    var answerobject = "";
+
     $("#questions").html('<img src="images/716.GIF" />');
     var questions = Parse.Object.extend("questionare");
   
     var query = new Parse.Query(questions);
     query.include("userprofileid");
+
     query.descending("updatedAt");
+
     query.find({
         success: function (questions) {
 
+            var Post = Parse.Object.extend("questionare");
+            var Comment = Parse.Object.extend("answers");
+            var innerQuery = new Parse.Query(Post);
+            var query = new Parse.Query(Comment);
+            query.doesNotMatchQuery("questionid", innerQuery);
+            query.find({
+                success: function (comments) {
+
+                    alert(JSON.stringify(comments[0]));
+                    answerobject = comments;
+                    
+                }
+            });
            
             var output = "";
             for (var i = 0; i < questions.length; i++) {

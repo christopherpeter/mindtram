@@ -44,7 +44,7 @@
                             }
 
                         }
-                        alert(commentsfound);
+                        //alert(commentsfound);
                         if (commentsfound == false) {                           
 
                             output = output + ' <div class="panel panel-default">';

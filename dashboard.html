@@ -91,7 +91,7 @@
             <div class="col-sm-7">
 
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h4>Latest Question Posted by <span id="latestquestionoveralluser"></span></h4><img id="latesquestionoveralluserimage" style="border-radius:50%width:50pxfloat:rightmargin-top:-15px"></div>
+                    <div class="panel-heading"><h4>Latest Question Posted by <span id="latestquestionoveralluser"></span></h4><img id="latesquestionoveralluserimage" style="border-radius:50%;width:50px;float:right;margin-top:-15px"></div>
                     <div class="panel-body">
 
                         <p id="latestquestionoverall"> <img src="images/716.GIF" /></p>
@@ -106,7 +106,7 @@
                             <label id="latestquestionoveralloption4"></label>
 
                         </p>
-                        <form>
+                        <form id="latestquestionoverallanswerform" onsubmit="return false;">
                             <select id="answeroption"><option value="no">Select Your Answer</option><option value="1">Option A</option><option value="2">Option B</option><option value="3">Option C</option><option value="4">Option D</option></select>
                             <div class="input-group">
 
@@ -120,6 +120,11 @@
                             </div>
 
                         </form>
+
+                        <div id="latestquestionoverallanswercomplete" style="display:none;" class="alert alert-success">
+                            <strong><span class="glyphicon glyphicon-ok"></span>You have answered this question</strong>
+
+                        </div>
 
                     </div>
                 </div>

@@ -32,6 +32,10 @@ function submitquestion()
 
     question.set("startdate", startdate);
     question.set("enddate", enddate);
+
+    var f = document.getElementById("questiontype");
+    var questiontype = f.options[f.selectedIndex].value;
+    question.set("type", questiontype);
    
     question.set("tags", $("#mySingleField").val());
 

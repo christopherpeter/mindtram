@@ -23,7 +23,8 @@ function loadquestionpreliminary() {
                 $("#optionb").val(object.get('option2'));
                 $("#optionc").val(object.get('option3'));
                 $("#optiond").val(object.get('option4'));
-                $("#answer option[value=" + object.get('correctanswer') + "]").attr('selected', 'selected');               
+                $("#answer option[value=" + object.get('correctanswer') + "]").attr('selected', 'selected');
+                $("#questiontype option[value=" + object.get('type') + "]").attr('selected', 'selected');
                 $("#startdate").val((object.get('startdate').getMonth() + 1) + '/' + object.get('startdate').getDate() + '/' + object.get('startdate').getFullYear());
                 $("#enddate").val((object.get('enddate').getMonth() + 1) + '/' + object.get('enddate').getDate() + '/' + object.get('enddate').getFullYear());
 
@@ -68,6 +69,9 @@ function savequestion() {
     question.set("correctanswer", answer);
     var startdate = new Date($("#startdate").val());
     var enddate = new Date($("#enddate").val());
+    var f = document.getElementById("questiontype");
+    var questiontype = f.options[f.selectedIndex].value;
+    question.set("type", questiontype);
 
     question.set("userprofileid", {
         __type: "Pointer",

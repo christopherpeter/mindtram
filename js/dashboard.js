@@ -113,10 +113,11 @@ function loaddashboard() {
 
                             if (object.get('question') == "optional") {
 
-                                $("#latestquestionoverallanswercompletestatus").html("You have answered this question");
+                                $("#latestquestionoverallanswercompletestatus").html('<span class="glyphicon glyphicon-ok"></span>You have answered this question');
                             }
                             else {
-                                $("#latestquestionoverallanswercompletestatus").html("You have answered this question");
+
+                                $("#latestquestionoverallanswercompletestatus").html('<span class="glyphicon glyphicon-ok"></span>You have posted your comments');
 
                             }
 
@@ -164,6 +165,36 @@ function loaddashboard() {
                 $("#latestquestionoption3").html("Option C: " + object.get('option3'));
                 $("#latestquestionoption4").html("Option D: " + object.get('option4'));
 
+            }
+
+        },
+        error: function (object, error) {
+            // The object was not retrieved successfully.
+            // error is a Parse.Error with an error code and message.
+            alert("Error: " + error.code + " " + error.message);
+        }
+    });
+
+
+
+
+    var score = Parse.Object.extend("useranswerstats");
+
+    var query = new Parse.Query(score);
+    query.include("profileid");
+
+    query.limit(3).descending("score");   
+
+    query.find({
+        success: function (score) {
+
+            var output = "";
+
+            for (var i = 0; i < score.length; i++) {
+
+                var object = score[i];
+                
+                $("#topanswererslist").html('<li class="list-group-item">' + object.get("profileid").get("firstname") + ' ' + object.get("profileid").get("lastname") + '-  <b>Score:' + object.get("score") + '</b><img src="' + object.get("profileid").get("profileimage").url() + '" style="float:right;border-radius:50%;width:50px;height:50px"  class="img-responsive"></li>')
             }
 
         },
@@ -273,6 +304,11 @@ function latestquestionoverallsaveanswer() {
                                     __type: "Pointer",
                                     className: "_User",
                                     objectId: Parse.User.current().id
+                                });
+                                answerstats.set("profileid", {
+                                    __type: "Pointer",
+                                    className: "_User",
+                                    objectId: localStorage.getItem("profileid")
                                 });
                                 answerstats.increment("answercount");
                                 if (answer.get("iscorrect") == 1)

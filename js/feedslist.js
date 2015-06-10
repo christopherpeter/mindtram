@@ -181,6 +181,13 @@ function saveanswer(questionid) {
                                     className: "_User",
                                     objectId: Parse.User.current().id
                                 });
+
+                                answerstats.set("profileid", {
+                                    __type: "Pointer",
+                                    className: "_User",
+                                    objectId: localStorage.getItem("profileid")
+                                });
+
                                 answerstats.increment("answercount");
                                 if (answer.get("iscorrect") == 1)
                                     answerstats.increment("score");

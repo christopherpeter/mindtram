@@ -6,6 +6,11 @@
     var questions = Parse.Object.extend("questionare");
 
     var query = new Parse.Query(questions);
+    query.notEqualTo("userid", {
+        __type: "Pointer",
+        className: "_User",
+        objectId: Parse.User.current().id
+    });
     query.include("userprofileid");
 
     query.descending("createdAt");

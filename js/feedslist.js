@@ -8,7 +8,7 @@
     var query = new Parse.Query(questions);
     query.include("userprofileid");
 
-    query.descending("updatedAt");
+    query.descending("createdAt");
 
     query.find({
         success: function (questions) {
@@ -23,7 +23,7 @@
                 __type: "Pointer",
                 className: "_User",
                 objectId: Parse.User.current().id
-            }).descending("updatedAt");
+            }).descending("createdAt");
 
             query.find({
                 success: function (comments) {
@@ -34,16 +34,18 @@
                         var object = questions[i];                        
                        
                         var commentsfound = false;
+                        var yourcomments = "";
                         for (var j = 0; j < comments.length; j++) {
 
                             if (comments[j].get("questionid").id == questions[i].id) {
 
                                 commentsfound = true;
+                                yourcomments = comments[j].get("comments");
                             }
 
                         }
-                       
-                        if (commentsfound == false) {
+                        alert(commentsfound);
+                        if (commentsfound == false) {                           
 
                             output = output + ' <div class="panel panel-default">';
                             output = output + ' <div class="panel-heading"><h4>Question was posted by  ' + object.get("userprofileid").get("firstname") + ' ' + object.get("userprofileid").get("lastname") + '</h4><img src="' + object.get("userprofileid").get("profileimage").url() + '"  style="border-radius:50%;width:50px;float:right;margin-top:-15px"></div>';
@@ -55,9 +57,11 @@
                             output = output + "<p>Option B -<label>" + object.get('option2') + "</label></p>"
                             output = output + "<p>Option C -<label>" + object.get('option3') + "</label></p>"
                             output = output + "<p>Option D -<label>" + object.get('option4') + "</label></p>"
-                            output = output + ' <hr>'
+                            output = output + ' <hr>'                           
                             output = output + '<form onsubmit="return false;">';
-                            output = output + '<select id="' + object.id + '_answeroption"><option value="no">Select Your Answer</option><option value="1">Option A</option><option value="2">Option B</option><option value="3">Option C</option><option value="4">Option D</option></select>';
+                            if (object.get('type') == "optional") {
+                                output = output + '<select id="' + object.id + '_answeroption"><option value="no">Select Your Answer</option><option value="1">Option A</option><option value="2">Option B</option><option value="3">Option C</option><option value="4">Option D</option></select>';
+                            }
                             output = output + '<div class="input-group">';
                             output = output + '<input type="text" class="form-control" id="' + object.id + '_comment" placeholder="Comment on your answer">';
                             output = output + '<div class="input-group-btn">';
@@ -67,10 +71,12 @@
                             output = output + '</form>';
                             output = output + ' </div>';
                             output = output + ' </div>';
+                            
+                            
                         }
 
                         else {
-                            alert(output);
+                           
                             output = output + ' <div class="panel panel-default">';
                             output = output + ' <div class="panel-heading"><h4>Question was posted by  ' + object.get("userprofileid").get("firstname") + ' ' + object.get("userprofileid").get("lastname") + '</h4><img src="' + object.get("userprofileid").get("profileimage").url() + '"  style="border-radius:50%;width:50px;float:right;margin-top:-15px"></div>';
                             output = output + ' <div class="panel-body">';
@@ -83,7 +89,13 @@
                             output = output + "<p>Option D -<label>" + object.get('option4') + "</label></p>"
                             output = output + ' <hr>'
                             output = output + ' <div class="alert alert-success">'
-                            output = output + ' <strong><span class="glyphicon glyphicon-ok"></span>You have answered this question</strong>'
+                            if (object.get('type') == "optional") {
+                                output = output + ' <strong><span class="glyphicon glyphicon-ok"></span>You have answered this question</strong>'
+                            }
+                            else {
+
+                                output = output + ' <strong><span class="glyphicon glyphicon-ok"></span>Your Comments: ' + yourcomments + '</strong>'
+                            }
                             output = output + '  </div>'
                             output = output + ' </div>';
                             output = output + ' </div>';

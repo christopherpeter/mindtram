@@ -7,7 +7,7 @@
         __type: "Pointer",
         className: "_User",
         objectId: Parse.User.current().id
-    }).descending("updatedAt");
+    }).descending("createdAt");
 
     //query.equalTo("userid", Parse.User.current().id);
     query.find({

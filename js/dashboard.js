@@ -6,7 +6,7 @@ function loaddashboard() {
         __type: "Pointer",
         className: "_User",
         objectId: Parse.User.current().id
-    }).descending("updatedAt");
+    }).descending("createdAt");
     query.count({
         success: function (count) {
             $("#totalquestions").html("Questions Posted: " + count);
@@ -23,7 +23,7 @@ function loaddashboard() {
         __type: "Pointer",
         className: "_User",
         objectId: Parse.User.current().id
-    }).descending("updatedAt");
+    }).descending("createdAt");
     query.count({
         success: function (count) {
             $("#totalanswers").html("Answered: " + count);
@@ -38,7 +38,7 @@ function loaddashboard() {
 
     var query = new Parse.Query(questions);
     query.include("userprofileid");
-    query.descending("updatedAt");
+    query.descending("createdAt");
     query.limit(1);
     query.find({
         success: function (questions) {
@@ -53,7 +53,7 @@ function loaddashboard() {
                 __type: "Pointer",
                 className: "_User",
                 objectId: Parse.User.current().id
-            }).descending("updatedAt");
+            }).descending("createdAt");
 
             query.find({
                 success: function (comments) {
@@ -83,9 +83,18 @@ function loaddashboard() {
                             $("#latestquestionoveralloption2").html("Option B: " + object.get('option2'));
                             $("#latestquestionoveralloption3").html("Option C: " + object.get('option3'));
                             $("#latestquestionoveralloption4").html("Option D: " + object.get('option4'));
-
+                            
                             $("#latestquestionoverallanswerform").show();
                             $("#latestquestionoverallanswercomplete").hide();
+
+                            if (object.get('type') == "optional") {
+
+                                $("#answeroption").show();
+                            }
+                            else {
+                                $("#answeroption").hide();
+
+                            }
                         }
                         else {
 
@@ -101,6 +110,15 @@ function loaddashboard() {
 
                             $("#latestquestionoverallanswerform").hide();
                             $("#latestquestionoverallanswercomplete").show();
+
+                            if (object.get('question') == "optional") {
+
+                                $("#latestquestionoverallanswercompletestatus").html("You have answered this question");
+                            }
+                            else {
+                                $("#latestquestionoverallanswercompletestatus").html("You have answered this question");
+
+                            }
 
                         }
 
@@ -124,7 +142,7 @@ function loaddashboard() {
         __type: "Pointer",
         className: "_User",
         objectId: Parse.User.current().id
-    }).descending("updatedAt");
+    }).descending("createdAt");
 
     query.limit(1)
 

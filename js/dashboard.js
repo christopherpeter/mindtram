@@ -111,7 +111,7 @@ function loaddashboard() {
                             $("#latestquestionoverallanswerform").hide();
                             $("#latestquestionoverallanswercomplete").show();
 
-                            if (object.get('question') == "optional") {
+                            if (object.get('type') == "optional") {
 
                                 $("#latestquestionoverallanswercompletestatus").html('<span class="glyphicon glyphicon-ok"></span>You have answered this question');
                             }

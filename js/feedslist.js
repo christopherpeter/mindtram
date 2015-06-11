@@ -72,9 +72,7 @@
 
                                 }
 
-                                if (object.get('type') == "optional") {
-
-                                   
+                                if (object.get('type') == "optional") {                                   
 
                                     if (comments[j].get("userprofileid").id == localStorage.getItem("profileid")) {
 

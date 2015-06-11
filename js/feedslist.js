@@ -20,15 +20,13 @@
 
             var Post = Parse.Object.extend("questionare");
             var Comment = Parse.Object.extend("answers");
+
             var innerQuery = new Parse.Query(Post);
             var query = new Parse.Query(Comment);
+            query.include("userprofileid");
             query.matchesQuery("questionid", innerQuery);
 
-            query.equalTo("userid", {
-                __type: "Pointer",
-                className: "_User",
-                objectId: Parse.User.current().id
-            }).descending("createdAt");
+            query.descending("createdAt");
 
             query.find({
                 success: function (comments) {
@@ -36,21 +34,56 @@
                     //alert(comments[0].get("questionid").id);
                     var output = "";
                     for (var i = 0; i < questions.length; i++) {
-                        var object = questions[i];                        
-                       
+                        var object = questions[i];
+
+                                           
                         var commentsfound = false;
                         var yourcomments = "";
+                        var commentsoutput = "";
+                        var optionselected = "";
                         for (var j = 0; j < comments.length; j++) {
 
                             if (comments[j].get("questionid").id == questions[i].id) {
 
                                 commentsfound = true;
+
                                 yourcomments = comments[j].get("comments");
+
+                                if (yourcomments == "") {
+                                    yourcomments = ' with no comments';
+                                }
+                                else {
+                                    yourcomments = ' and commented : ' + yourcomments;
+
+                                }
+
+                                switch (comments[j].get("answer")) {
+                                    case "1":
+                                        optionselected = "Option A"
+                                        break;
+                                    case "2":
+                                        optionselected = "Option B"
+                                        break;
+                                    case "3":
+                                        optionselected = "Option C"
+                                        break;
+                                    case "4": optionselected = "Option D"
+                                        break;
+
+                                }
+
+                                if (object.get('type') == "optional") {
+                                    commentsoutput = commentsoutput + ' <span class="glyphicon glyphicon-ok"></span> ' + comments[j].get("userprofileid").get("firstname") + ' ' + comments[j].get("userprofileid").get("lastname") + ' answered : ' + optionselected + yourcomments + '<br/>'
+                                }
+                                else {
+
+                                    commentsoutput = commentsoutput + ' <span class="glyphicon glyphicon-ok"></span>' + comments[j].get("userprofileid").get("firstname") + ' ' + comments[j].get("userprofileid").get("lastname") + ' commented : ' + yourcomments + '<br/>'
+                                }
                             }
 
                         }
                         //alert(commentsfound);
-                        if (commentsfound == false) {                           
+                        if (commentsfound == false) {
 
                             output = output + ' <div class="panel panel-default">';
                             output = output + ' <div class="panel-heading"><h4>Question was posted by  ' + object.get("userprofileid").get("firstname") + ' ' + object.get("userprofileid").get("lastname") + '</h4><img src="' + object.get("userprofileid").get("profileimage").url() + '"  style="border-radius:50%;width:50px;float:right;margin-top:-15px"></div>';
@@ -93,14 +126,8 @@
                             output = output + "<p>Option C -<label>" + object.get('option3') + "</label></p>"
                             output = output + "<p>Option D -<label>" + object.get('option4') + "</label></p>"
                             output = output + ' <hr>'
-                            output = output + ' <div class="alert alert-success">'
-                            if (object.get('type') == "optional") {
-                                output = output + ' <strong><span class="glyphicon glyphicon-ok"></span>You have answered this question</strong>'
-                            }
-                            else {
-
-                                output = output + ' <strong><span class="glyphicon glyphicon-ok"></span>Your Comments: ' + yourcomments + '</strong>'
-                            }
+                            output = output + ' <div class="alert alert-info">'
+                            output = output + commentsoutput;
                             output = output + '  </div>'
                             output = output + ' </div>';
                             output = output + ' </div>';
@@ -142,6 +169,12 @@ function saveanswer(questionid) {
                 __type: "Pointer",
                 className: "_User",
                 objectId: Parse.User.current().id
+            });
+
+            answer.set("profileid", {
+                __type: "Pointer",
+                className: "_User",
+                objectId: localStorage.getItem("profileid")
             });
 
             answer.set("questionid", {

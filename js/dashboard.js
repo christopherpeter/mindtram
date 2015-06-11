@@ -263,6 +263,12 @@ function latestquestionoverallsaveanswer() {
                 objectId: Parse.User.current().id
             });
 
+            answer.set("profileid", {
+                __type: "Pointer",
+                className: "_User",
+                objectId: localStorage.getItem("profileid")
+            });
+
             answer.set("questionid", {
                 __type: "Pointer",
                 className: "questionare",

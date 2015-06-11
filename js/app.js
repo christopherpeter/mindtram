@@ -185,6 +185,13 @@ function updateprofile() {
           
             var profile = Parse.Object.extend("userprofiles");
             var profile = new profile();
+
+            profile.set("objectId", {
+                __type: "Pointer",
+                className: "_User",
+                objectId: localStorage.getItem("profileid")
+            });
+
             profile.set("userid", {
                 __type: "Pointer",
                 className: "_User",
@@ -230,12 +237,6 @@ function updateprofile() {
     });
 }
 
-function loadstatistics()
-{   
-
-    
-
-}
 
 function logout() {
 

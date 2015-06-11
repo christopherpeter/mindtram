@@ -7,10 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" />
-    
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />    
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script src="js/intialize.js"></script>
     <script src="js/app.js"></script>
     <script src="js/feedslist.js"></script>
@@ -53,6 +53,35 @@
 
          
         </div>
+
+        <div class="modal fade" id="editcommentanswermodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Edit Your Answer/Comment</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                
+                                <select id="answeroption"><option value="no">Select Your Answer</option><option value="1">Option A</option><option value="2">Option B</option><option value="3">Option C</option><option value="4">Option D</option></select>
+                            </div>
+                            <div class="form-group">
+                                <label for="message-text" class="control-label">Comments:</label>
+                                <textarea class="form-control" id="editcomments"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="saveeditedcommentanswer()">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
 
     </div>
 

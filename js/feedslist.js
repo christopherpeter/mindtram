@@ -73,11 +73,28 @@
                                 }
 
                                 if (object.get('type') == "optional") {
-                                    commentsoutput = commentsoutput + ' <span class="glyphicon glyphicon-ok"></span> ' + comments[j].get("userprofileid").get("firstname") + ' ' + comments[j].get("userprofileid").get("lastname") + ' answered : ' + optionselected + yourcomments + '<br/>'
+
+                                   
+
+                                    if (comments[j].get("userprofileid").id == localStorage.getItem("profileid")) {
+
+                                        commentsoutput = commentsoutput + ' <span class="glyphicon glyphicon-ok"></span> ' + comments[j].get("userprofileid").get("firstname") + ' ' + comments[j].get("userprofileid").get("lastname") + ' answered : ' + optionselected + yourcomments + '<a style="margin-left:10px;" href="#" onclick=editanswerorcomment("o","' + comments[j].get("questionid").id + '","' + comments[j].id + '")><img width="20px" src="images/edit.png" /></a><br/>'
+                                    }
+                                    else {
+
+                                        commentsoutput = commentsoutput + ' <span class="glyphicon glyphicon-ok"></span> ' + comments[j].get("userprofileid").get("firstname") + ' ' + comments[j].get("userprofileid").get("lastname") + ' answered : ' + optionselected + yourcomments + '<br/>'
+                                    }
                                 }
                                 else {
 
-                                    commentsoutput = commentsoutput + ' <span class="glyphicon glyphicon-ok"></span>' + comments[j].get("userprofileid").get("firstname") + ' ' + comments[j].get("userprofileid").get("lastname") + ' commented : ' + yourcomments + '<br/>'
+                                    if (comments[j].get("userprofileid").id == localStorage.getItem("profileid")) {
+
+                                        commentsoutput = commentsoutput + ' <span class="glyphicon glyphicon-ok"></span>' + comments[j].get("userprofileid").get("firstname") + ' ' + comments[j].get("userprofileid").get("lastname") + ' commented : ' + yourcomments + '<a style="margin-left:10px;" href="#" onclick=editanswerorcomment("d","' + comments[j].get("questionid").id + '","' + comments[j].id + '")><img width="20px" src="images/edit.png" /></a><br/>'
+                                    }
+                                    else {
+
+                                        commentsoutput = commentsoutput + ' <span class="glyphicon glyphicon-ok"></span>' + comments[j].get("userprofileid").get("firstname") + ' ' + comments[j].get("userprofileid").get("lastname") + ' commented : ' + yourcomments + '<br/>'
+                                    }
                                 }
                             }
 
@@ -153,6 +170,29 @@
 }
 
 
+var editreadyquestionid = ""; var editreadyanswerid = "";
+
+function editanswerorcomment(type,questionid,answerid)
+{
+    if (type == "d") {
+
+        $("#answeroption").hide();
+    } else {
+
+        $("#answeroption").show();
+    }
+
+    $('#editcommentanswermodal').modal('show'); 
+
+    editreadyquestionid = questionid; editreadyanswerid = answerid;   
+}
+
+function saveeditedcommentanswer() {
+
+    updateanswer(editreadyquestionid, editreadyanswerid);
+}
+
+//For saving an answer
 function saveanswer(questionid) {
     var questions = Parse.Object.extend("questionare");
 
@@ -239,6 +279,141 @@ function saveanswer(questionid) {
 
                             }
                             else {
+                                var answerstats1 = Parse.Object.extend("useranswerstats");
+                                var answerstats1 = new answerstats1();
+
+                                answerstats1.set("objectId", answerstats[0].id);
+                                answerstats1.increment("answercount");
+
+                                if (answer.get("iscorrect") == 1)
+                                    answerstats1.increment("score");
+
+                                answerstats1.save(null, {
+                                    success: function (answerstats1) {
+                                        loadfeeds();
+                                    }
+                                });
+
+                            }
+
+                        },
+                        error: function (error) {
+                            alert("Error: " + error.code + " " + error.message);
+                        }
+                    });
+
+                },
+                error: function (question, error) {
+                    // Execute any logic that should take place if the save fails.
+                    // error is a Parse.Error with an error code and message.
+                    alert('Failed to create new object, with error code: ' + error.message);
+                }
+            });
+
+        },
+        error: function (object, error) {
+            // The object was not retrieved successfully.
+            // error is a Parse.Error with an error code and message.
+            alert("Error: " + error.code + " " + error.message);
+        }
+    });
+
+
+
+}
+
+
+//For updating an answer
+function updateanswer(questionid,answerid) {
+    var questions = Parse.Object.extend("questionare");
+
+    var query = new Parse.Query(questions);
+    query.include("userprofileid");
+    query.equalTo("objectId", questionid);
+    query.find({
+        success: function (questions) {
+
+            var answer = Parse.Object.extend("answers");
+            var answer = new answer();
+
+            answer.set("objectId", answerid);
+
+            answer.set("userid", {
+                __type: "Pointer",
+                className: "_User",
+                objectId: Parse.User.current().id
+            });
+
+            answer.set("userprofileid", {
+                __type: "Pointer",
+                className: "userprofiles",
+                objectId: localStorage.getItem("profileid")
+            });
+
+            answer.set("questionid", {
+                __type: "Pointer",
+                className: "questionare",
+                objectId: questions[0].id
+            });
+
+            var e = document.getElementById('answeroption');
+            var answeroption = e.options[e.selectedIndex].value;
+
+            answer.set("answer", answeroption);
+            answer.set("comments", $('#editcomments').val());
+
+            if (questions[0].get('correctanswer') == answeroption)
+                answer.set("iscorrect", 1);
+            else
+                answer.set("iscorrect", 0);
+
+            answer.save(null, {
+                success: function (answer) {
+                    // Execute any logic that should take place after the object is saved.
+                    alert('Answer submitted with ID: ' + answer.id);
+
+                    var answerstats = Parse.Object.extend("useranswerstats");
+                    var query = new Parse.Query(answerstats);
+                    query.equalTo("userid", {
+                        __type: "Pointer",
+                        className: "_User",
+                        objectId: Parse.User.current().id
+                    });
+                    query.find({
+                        success: function (answerstats) {
+
+                            if (answerstats.length == 0) {
+
+                                var answerstats = Parse.Object.extend("useranswerstats");
+                                var answerstats = new answerstats();
+
+                                answerstats.set("userid", {
+                                    __type: "Pointer",
+                                    className: "_User",
+                                    objectId: Parse.User.current().id
+                                });
+
+                                answerstats.set("profileid", {
+                                    __type: "Pointer",
+                                    className: "userprofiles",
+                                    objectId: localStorage.getItem("profileid")
+                                });
+
+                                answerstats.increment("answercount");
+                                if (answer.get("iscorrect") == 1)
+                                    answerstats.increment("score");
+
+                                answerstats.save(null, {
+                                    success: function (answerstats) {
+
+                                        $('#editcommentanswermodal').modal('hide');
+                                        loadfeeds();
+                                    }
+                                });
+
+                            }
+                            else {
+
                                 var answerstats1 = Parse.Object.extend("useranswerstats");
                                 var answerstats1 = new answerstats1();
 

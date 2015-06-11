@@ -74,7 +74,7 @@
                                 }
 
                                 if (object.get('type') == "optional") {
-                                    commentsoutput = commentsoutput + '<span class="glyphicon glyphicon-ok"></span>: ' + comments[j].get("userprofileid").get("firstname") + ' ' + comments[j].get("userprofileid").get("lastname") + ' answered : ' + optionselected + yourcomments + '<br/>'
+                                    commentsoutput = commentsoutput + '<span class="glyphicon glyphicon-ok"></span> ' + comments[j].get("userprofileid").get("firstname") + ' ' + comments[j].get("userprofileid").get("lastname") + ' answered : ' + optionselected + yourcomments + '<br/>'
                                 }
                                 else {
 

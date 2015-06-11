@@ -187,14 +187,14 @@ function loaddashboard() {
 
     query.find({
         success: function (score) {
-
+            
             var output = "";
 
             for (var i = 0; i < score.length; i++) {
 
                 var object = score[i];
                 
-                $("#topanswererslist").html('<li class="list-group-item">' + object.get("profileid").get("firstname") + ' ' + object.get("profileid").get("lastname") + '-  <b>Score:' + object.get("score") + '</b><img src="' + object.get("profileid").get("profileimage").url() + '" style="float:right;border-radius:50%;width:50px;height:50px"  class="img-responsive"></li>')
+                $("#topanswererslist").append('<li class="list-group-item">' + object.get("profileid").get("firstname") + ' ' + object.get("profileid").get("lastname") + '-  <b>Score:' + object.get("score") + '</b><img src="' + object.get("profileid").get("profileimage").url() + '" style="float:right;border-radius:50%;width:50px;height:50px"  class="img-responsive"></li><br/>')
             }
 
         },
@@ -265,7 +265,7 @@ function latestquestionoverallsaveanswer() {
 
             answer.set("userprofileid", {
                 __type: "Pointer",
-                className: "_User",
+                className: "userprofiles",
                 objectId: localStorage.getItem("profileid")
             });
 
@@ -313,7 +313,7 @@ function latestquestionoverallsaveanswer() {
                                 });
                                 answerstats.set("profileid", {
                                     __type: "Pointer",
-                                    className: "_User",
+                                    className: "userprofiles",
                                     objectId: localStorage.getItem("profileid")
                                 });
                                 answerstats.increment("answercount");

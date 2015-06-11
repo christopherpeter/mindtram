@@ -53,7 +53,7 @@
                                     yourcomments = ' with no comments';
                                 }
                                 else {
-                                    yourcomments = ' and commented : ' + yourcomments;
+                                    yourcomments = ' and commented : "' + yourcomments+'"';
 
                                 }
 
@@ -173,7 +173,7 @@ function saveanswer(questionid) {
 
             answer.set("userprofileid", {
                 __type: "Pointer",
-                className: "_User",
+                className: "userprofiles",
                 objectId: localStorage.getItem("profileid")
             });
 
@@ -222,7 +222,7 @@ function saveanswer(questionid) {
 
                                 answerstats.set("profileid", {
                                     __type: "Pointer",
-                                    className: "_User",
+                                    className: "userprofiles",
                                     objectId: localStorage.getItem("profileid")
                                 });
 

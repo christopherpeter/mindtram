@@ -28,6 +28,8 @@
 
             query.descending("createdAt");
 
+            query.limit(3)
+
             query.find({
                 success: function (comments) {
 
@@ -53,7 +55,7 @@
                                     yourcomments = ' with no comments';
                                 }
                                 else {
-                                    yourcomments = ' and commented : "' + yourcomments+'"';
+                                    yourcomments = ' commented : "' + yourcomments+'"';
 
                                 }
 
@@ -76,11 +78,11 @@
 
                                     if (comments[j].get("userprofileid").id == localStorage.getItem("profileid")) {
 
-                                        commentsoutput = commentsoutput + ' <span class="glyphicon glyphicon-ok"></span> ' + comments[j].get("userprofileid").get("firstname") + ' ' + comments[j].get("userprofileid").get("lastname") + ' answered : ' + optionselected + yourcomments + '<a style="margin-left:10px;" href="#" onclick=editanswerorcomment("o","' + comments[j].get("questionid").id + '","' + comments[j].id + '")><img width="20px" src="images/edit.png" /></a><br/>'
+                                        commentsoutput = commentsoutput + ' <span class="glyphicon glyphicon-ok"></span> ' + comments[j].get("userprofileid").get("firstname") + ' ' + comments[j].get("userprofileid").get("lastname") + ' answered  and '+ yourcomments + '<a style="margin-left:10px;" href="#" onclick=editanswerorcomment("o","' + comments[j].get("questionid").id + '","' + comments[j].id + '")><img width="20px" src="images/edit.png" /></a><br/>'
                                     }
                                     else {
 
-                                        commentsoutput = commentsoutput + ' <span class="glyphicon glyphicon-ok"></span> ' + comments[j].get("userprofileid").get("firstname") + ' ' + comments[j].get("userprofileid").get("lastname") + ' answered : ' + optionselected + yourcomments + '<br/>'
+                                        commentsoutput = commentsoutput + ' <span class="glyphicon glyphicon-ok"></span> ' + comments[j].get("userprofileid").get("firstname") + ' ' + comments[j].get("userprofileid").get("lastname") + ' answered and '+ yourcomments + '<br/>'
                                     }
                                 }
                                 else {

@@ -59,69 +59,75 @@ function loaddashboard() {
                 success: function (comments) {
 
                     var output = "";
-                    for (var i = 0; i < questions.length; i++) {
-                        var object = questions[i];
-                        questionid = questions[i].id;
+                    if (questions.length != 0) {
+                        for (var i = 0; i < questions.length; i++) {
+                            var object = questions[i];
+                            questionid = questions[i].id;
 
-                        var commentsfound = false;
-                        for (var j = 0; j < comments.length; j++) {
+                            var commentsfound = false;
+                            for (var j = 0; j < comments.length; j++) {
 
-                            if (comments[j].get("questionid").id == questions[i].id) {
+                                if (comments[j].get("questionid").id == questions[i].id) {
 
-                                commentsfound = true;
-                            }
-
-                        }
-                        if (commentsfound == false) {
-
-                            $("#latestquestionoveralluser").html(object.get("userprofileid").get("firstname") + " " + object.get("userprofileid").get("lastname"));
-
-                            $('#latesquestionoveralluserimage')[0].src = object.get("userprofileid").get("profileimage").url();
-                            $("#latestquestionoverall").html(object.get('question'));
-
-                            $("#latestquestionoveralloption1").html("Option A: " + object.get('option1'));
-                            $("#latestquestionoveralloption2").html("Option B: " + object.get('option2'));
-                            $("#latestquestionoveralloption3").html("Option C: " + object.get('option3'));
-                            $("#latestquestionoveralloption4").html("Option D: " + object.get('option4'));
-                            
-                            $("#latestquestionoverallanswerform").show();
-                            $("#latestquestionoverallanswercomplete").hide();
-
-                            if (object.get('type') == "optional") {
-
-                                $("#answeroption").show();
-                            }
-                            else {
-                                $("#answeroption").hide();
+                                    commentsfound = true;
+                                }
 
                             }
-                        }
-                        else {
+                            if (commentsfound == false) {
 
-                            $("#latestquestionoveralluser").html(object.get("userprofileid").get("firstname") + " " + object.get("userprofileid").get("lastname"));
+                                $("#latestquestionoveralluser").html(object.get("userprofileid").get("firstname") + " " + object.get("userprofileid").get("lastname"));
 
-                            $('#latesquestionoveralluserimage')[0].src = object.get("userprofileid").get("profileimage").url();
-                            $("#latestquestionoverall").html(object.get('question'));
+                                $('#latesquestionoveralluserimage')[0].src = object.get("userprofileid").get("profileimage").url();
+                                $("#latestquestionoverall").html(object.get('question'));
 
-                            $("#latestquestionoveralloption1").html("Option A: " + object.get('option1'));
-                            $("#latestquestionoveralloption2").html("Option B: " + object.get('option2'));
-                            $("#latestquestionoveralloption3").html("Option C: " + object.get('option3'));
-                            $("#latestquestionoveralloption4").html("Option D: " + object.get('option4'));
+                                $("#latestquestionoveralloption1").html("Option A: " + object.get('option1'));
+                                $("#latestquestionoveralloption2").html("Option B: " + object.get('option2'));
+                                $("#latestquestionoveralloption3").html("Option C: " + object.get('option3'));
+                                $("#latestquestionoveralloption4").html("Option D: " + object.get('option4'));
 
-                            $("#latestquestionoverallanswerform").hide();
-                            $("#latestquestionoverallanswercomplete").show();
+                                $("#latestquestionoverallanswerform").show();
+                                $("#latestquestionoverallanswercomplete").hide();
 
-                            if (object.get('type') == "optional") {
+                                if (object.get('type') == "optional") {
 
-                                $("#latestquestionoverallanswercompletestatus").html('<span class="glyphicon glyphicon-ok"></span>You have answered this question');
+                                    $("#answeroption").show();
+                                }
+                                else {
+                                    $("#answeroption").hide();
+
+                                }
                             }
                             else {
 
-                                $("#latestquestionoverallanswercompletestatus").html('<span class="glyphicon glyphicon-ok"></span>You have posted your comments');
+                                $("#latestquestionoveralluser").html(object.get("userprofileid").get("firstname") + " " + object.get("userprofileid").get("lastname"));
+
+                                $('#latesquestionoveralluserimage')[0].src = object.get("userprofileid").get("profileimage").url();
+                                $("#latestquestionoverall").html(object.get('question'));
+
+                                $("#latestquestionoveralloption1").html("Option A: " + object.get('option1'));
+                                $("#latestquestionoveralloption2").html("Option B: " + object.get('option2'));
+                                $("#latestquestionoveralloption3").html("Option C: " + object.get('option3'));
+                                $("#latestquestionoveralloption4").html("Option D: " + object.get('option4'));
+
+                                $("#latestquestionoverallanswerform").hide();
+                                $("#latestquestionoverallanswercomplete").show();
+
+                                if (object.get('type') == "optional") {
+
+                                    $("#latestquestionoverallanswercompletestatus").html('<span class="glyphicon glyphicon-ok"></span>You have answered this question');
+                                }
+                                else {
+
+                                    $("#latestquestionoverallanswercompletestatus").html('<span class="glyphicon glyphicon-ok"></span>You have posted your comments');
+
+                                }
 
                             }
 
                         }
+                    } else {
+
+                        $("#latestquestionoveralluser").html("No questions are yet been posted");
 
                     }
 
@@ -153,17 +159,23 @@ function loaddashboard() {
         success: function (questions) {
 
             var output = "";
+            if (questions.length != 0) {
+                for (var i = 0; i < questions.length; i++) {
 
-            for (var i = 0; i < questions.length; i++) {
+                    var object = questions[i];
 
-                var object = questions[i];
+                    $("#latestquestion").html(object.get('question'));
 
-                $("#latestquestion").html(object.get('question'));
+                    $("#latestquestionoption1").html("Option A: " + object.get('option1'));
+                    $("#latestquestionoption2").html("Option B: " + object.get('option2'));
+                    $("#latestquestionoption3").html("Option C: " + object.get('option3'));
+                    $("#latestquestionoption4").html("Option D: " + object.get('option4'));
 
-                $("#latestquestionoption1").html("Option A: " + object.get('option1'));
-                $("#latestquestionoption2").html("Option B: " + object.get('option2'));
-                $("#latestquestionoption3").html("Option C: " + object.get('option3'));
-                $("#latestquestionoption4").html("Option D: " + object.get('option4'));
+                }
+            }
+            else {
+
+                $("#latestquestion").html("You have not posted any questions");
 
             }
 
@@ -189,12 +201,17 @@ function loaddashboard() {
         success: function (score) {
             
             var output = "";
+            if (score.length != 0) {
+                for (var i = 0; i < score.length; i++) {
 
-            for (var i = 0; i < score.length; i++) {
+                    var object = score[i];
 
-                var object = score[i];
-                
-                $("#topanswererslist").append('<li class="list-group-item">' + object.get("profileid").get("firstname") + ' ' + object.get("profileid").get("lastname") + '-  <b>Score:' + object.get("score") + '</b><img src="' + object.get("profileid").get("profileimage").url() + '" style="float:right;border-radius:50%;width:50px;height:50px"  class="img-responsive"></li><br/>')
+                    $("#topanswererslist").append('<li class="list-group-item">' + object.get("profileid").get("firstname") + ' ' + object.get("profileid").get("lastname") + '-  <b>Score:' + object.get("score") + '</b><img src="' + object.get("profileid").get("profileimage").url() + '" style="float:right;border-radius:50%;width:50px;height:50px"  class="img-responsive"></li><br/>')
+                }
+            }
+            else {
+
+                $("#topanswererslist").html('No Scorers yet!')
             }
 
         },
